@@ -546,6 +546,260 @@ void preemtive_priority(int n, vector<int> at, vector<int> bt, vector<int> pt)
     cout << "Average waiting time: " << sum1 / num1 << endl;
 }
 
+void preemtive_sjf(int n, vector<int> at, vector<int> bt)
+{
+    int ending = 0;
+    int ref_ct = 0;
+
+    vector<int> arrival_time;
+    vector<int> burst_time;
+
+    arrival_time = at;
+    burst_time = bt;
+
+    vector<int> ct(n, 0);
+
+    for (int i = 0; i < bt.size(); i++)
+    {
+        ending += bt[i];
+    }
+
+    while (ref_ct != ending)
+    {
+        vector<int> ref_at;
+
+        for (int i = 0; i < at.size(); i++)
+        {
+            if (at[i] <= ref_ct)
+            {
+                ref_at.emplace_back(i);
+            }
+        }
+
+        int min = 0;
+
+        for (int j = 0; j < ref_at.size(); j++)
+        {
+            if (bt[ref_at[j]] < bt[min])
+            {
+                min = ref_at[j];
+            }
+        }
+
+        ref_ct += 1;
+        bt[min] = bt[min] - 1;
+
+        if (bt[min] == 0)
+        {
+            at[min] = INT_MAX;
+            ct[min] = ref_ct;
+            bt[min] = INT_MAX;
+        }
+    }
+
+    cout << "Completion times: " << endl;
+
+    for (int i = 0; i < ct.size(); i++)
+    {
+        cout << ct[i] << " ";
+    }
+    cout << endl;
+
+    vector<int> tat;
+    vector<int> wt;
+
+    for (int i = 0; i < n; i++)
+    {
+        int temp_tat = ct[i] - arrival_time[i];
+        tat.emplace_back(temp_tat);
+        int temp_wt = temp_tat - burst_time[i];
+        wt.emplace_back(temp_wt);
+    }
+
+    cout << "Gantt Chart: " << endl;
+    for (int i = 0; i < n; i++)
+    {
+        string temp = "P" + to_string(i + 1);
+        string tr = to_string(ct[i]);
+
+        string ans = "(" + temp + ", " + tr + "), ";
+        cout << ans;
+    }
+    cout << endl;
+
+    int sum = 0;
+    int num;
+
+    for (int i = 0; i < tat.size(); i++)
+    {
+        sum += tat[i];
+    }
+
+    num = tat.size();
+
+    int sum1 = 0;
+
+    for (int i = 0; i < wt.size(); i++)
+    {
+        sum1 += wt[i];
+    }
+
+    int num1 = wt.size();
+
+    cout << "Final Result Table: \n";
+
+    cout << "********************************************************************************************" << endl;
+    cout << "| Process Id   ";
+    cout << "| Arrival Time ";
+    cout << "| Burst Time   ";
+    cout << "| Completion   ";
+    cout << "| Turn around  ";
+    cout << "| waiting time |" << endl;
+    cout << "********************************************************************************************" << endl;
+    for (int i = 0; i < n; i++)
+    {
+        cout << "| p" << (i + 1) << "           ";
+        cout << "| " << arrival_time[i] << "    ";
+        cout << "| " << burst_time[i] << "      ";
+        cout << "| " << ct[i] << "      ";
+        cout << "| " << tat[i] << "      ";
+        cout << "| " << wt[i] << "      ";
+        cout << endl;
+    }
+
+    cout << "Average turn around time: " << sum / num << endl;
+    cout << "Average waiting time: " << sum1 / num1 << endl;
+}
+
+void non_preemtive_priority(int n, vector<int> at, vector<int> bt, vector<int> pt)
+{
+    int ending = 0;
+    int ref_ct = 0;
+
+    vector<int> arrival_time;
+    vector<int> burst_time;
+    vector<int> priority_val;
+
+    priority_val = pt;
+    arrival_time = at;
+    burst_time = bt;
+
+    vector<int> ct(n, 0);
+
+    for (int i = 0; i < bt.size(); i++)
+    {
+        ending += bt[i];
+    }
+
+    while (ref_ct != ending)
+    {
+        vector<int> ref_at;
+
+        for (int i = 0; i < at.size(); i++)
+        {
+            if (at[i] <= ref_ct)
+            {
+                ref_at.emplace_back(i);
+            }
+        }
+
+        int min = 0;
+
+        for (int j = 0; j < ref_at.size(); j++)
+        {
+            if (pt[ref_at[j]] < pt[min])
+            {
+                min = ref_at[j];
+            }
+        }
+
+        ref_ct += bt[min];
+        bt[min] = 0;
+
+        if (bt[min] == 0)
+        {
+            at[min] = INT_MAX;
+            ct[min] = ref_ct;
+            pt[min] = INT_MAX;
+        }
+    }
+
+    cout << "Completion times: " << endl;
+
+    for (int i = 0; i < ct.size(); i++)
+    {
+        cout << ct[i] << " ";
+    }
+    cout << endl;
+
+    vector<int> tat;
+    vector<int> wt;
+
+    for (int i = 0; i < n; i++)
+    {
+        int temp_tat = ct[i] - arrival_time[i];
+        tat.emplace_back(temp_tat);
+        int temp_wt = temp_tat - burst_time[i];
+        wt.emplace_back(temp_wt);
+    }
+
+    cout << "Gantt Chart: " << endl;
+    for (int i = 0; i < n; i++)
+    {
+        string temp = "P" + to_string(i + 1);
+        string tr = to_string(ct[i]);
+
+        string ans = "(" + temp + ", " + tr + "), ";
+        cout << ans;
+    }
+    cout << endl;
+
+    int sum = 0;
+    int num;
+
+    for (int i = 0; i < tat.size(); i++)
+    {
+        sum += tat[i];
+    }
+
+    num = tat.size();
+
+    int sum1 = 0;
+
+    for (int i = 0; i < wt.size(); i++)
+    {
+        sum1 += wt[i];
+    }
+
+    int num1 = wt.size();
+
+    cout << "Final Result Table: \n";
+
+    cout << "********************************************************************************************" << endl;
+    cout << "| Process Id   ";
+    cout << "| Priority   ";
+    cout << "| Arrival Time ";
+    cout << "| Burst Time   ";
+    cout << "| Completion   ";
+    cout << "| Turn around  ";
+    cout << "| waiting time |" << endl;
+    cout << "********************************************************************************************" << endl;
+    for (int i = 0; i < n; i++)
+    {
+        cout << "| p" << (i + 1) << "           ";
+        cout << "| " << priority_val[i] << "    ";
+        cout << "| " << arrival_time[i] << "    ";
+        cout << "| " << burst_time[i] << "      ";
+        cout << "| " << ct[i] << "      ";
+        cout << "| " << tat[i] << "      ";
+        cout << "| " << wt[i] << "      ";
+        cout << endl;
+    }
+
+    cout << "Average turn around time: " << sum / num << endl;
+    cout << "Average waiting time: " << sum1 / num1 << endl;
+}
+
 int main()
 {
     int n;
@@ -634,6 +888,7 @@ int main()
             {
             case 1:
                 cout << "Non- Preemptive Priority selected \n ";
+                non_preemtive_priority(n, arrival_time, burst_time, priority_val);
                 flag = false;
                 break;
             case 3:
@@ -669,6 +924,7 @@ int main()
                 break;
             case 3:
                 cout << "Preemptive SJF selected \n";
+                preemtive_sjf(n, arrival_time, burst_time);
                 flag = false;
                 break;
             case 4:
