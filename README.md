@@ -1,15 +1,22 @@
 # 🕒 Process Scheduling Simulator
 
-🪟 🐧 🍏 ![C++](https://img.shields.io/badge/C++-11/14/17/20-blue.svg) ![License](https://img.shields.io/badge/License-MIT-green.svg) ![Contributors](https://img.shields.io/badge/Contributors-Welcome-orange.svg)
+🪟 🐧 🍏 ![C++](https://img.shields.io/badge/C++-11/14/17/20-blue.svg) 
 
 ## Overview
 This project simulates various process scheduling algorithms in C++. It provides a command-line interface for users to select different scheduling policies and observe their effects on process execution.
 
 ## Features
-- 📜 **Round Robin Scheduling**
+## Implemented Scheduling Algorithms
+
+- 🔄 **Round Robin Scheduling**
 - 🚀 **Priority Scheduling**
 - ⏳ **First-Come, First-Served (FCFS)**
-- 🛠️ **Custom Configuration Options**
+- 📊 **Shortest Job Next (SJN)**
+- 🔥 **Shortest Remaining Time First (SRTF)**
+- 🎯 **Highest Response Ratio Next (HRRN)**
+- 🕰️ **Multilevel Queue Scheduling**
+- 🛠️ **Custom Scheduling Algorithm**
+
 
 Prerequisites
 C++ Compiler: Ensure you have a C++ compiler (e.g., GCC, Clang) installed on your machine.
@@ -53,7 +60,7 @@ Process ID | Arrival Time | Burst Time | Priority
 1          | 0            | 5          | 2
 ...
 
-🧩 Keywords
+🧩 Keywords: 
 Process Scheduling
 Operating Systems
 FCFS
