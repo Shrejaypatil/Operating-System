@@ -28,7 +28,7 @@ cd process-scheduling-simulator
 Compile the Code
 bash
 Copy code
-g++ index.cpp -o scheduler
+g++ OS_CPU_Scheduling.cpp -o scheduler
 Run the Simulator
 bash
 Copy code
