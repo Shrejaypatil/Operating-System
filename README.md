@@ -23,7 +23,7 @@ C++ Compiler: Ensure you have a C++ compiler (e.g., GCC, Clang) installed on you
 Clone the Repository
 bash
 Copy code
-git clone https://github.com/your-username/process-scheduling-simulator.git
+git clone [ https://github.com/your-username/process-scheduling-simulator.git](https://github.com/Shrejaypatil/Operating-System.git)
 cd process-scheduling-simulator
 Compile the Code
 bash
