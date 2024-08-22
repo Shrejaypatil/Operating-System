@@ -42,28 +42,3 @@ Input the arrival time, burst time, and optionally, the priority for each proces
 View Output:
 
 The program will display the scheduled processes in order, along with their respective times.
-
-
-📚 Example
-Sample Input
-mathematica
-Copy code
-Enter number of processes: 3
-Enter arrival time for process 1: 0
-Enter burst time for process 1: 5
-Enter priority for process 1: 2
-...
-Sample Output
-css
-Copy code
-Process ID | Arrival Time | Burst Time | Priority
-1          | 0            | 5          | 2
-...
-
-🧩 Keywords: 
-Process Scheduling
-Operating Systems
-FCFS
-SJF
-Priority Scheduling
-C++
